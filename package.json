@@ -14,7 +14,9 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "gatsby": "^2.24.67",
+    "dotenv": "^8.2.0",
+    "gatsby": "^2.24.91",
+    "gatsby-source-contentful": "^3.0.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
