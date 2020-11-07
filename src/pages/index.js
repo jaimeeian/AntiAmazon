@@ -1,7 +1,21 @@
 import React from "react"
-import {Link  } from "gatsby"
+import {graphql, Link, useStaticQuery  } from "gatsby"
 
 export default function Home() {
+
+  const data = useStaticQuery(graphql`
+  query {
+    allContentfulContentType {
+      edges {
+        node {
+          name
+          description
+        }
+      }
+    }
+  }
+  `)
+  console.log(data)
   return(
     <div>
       <h1>Welcome!</h1>
