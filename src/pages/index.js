@@ -18,6 +18,18 @@ export default function Home() {
   console.log(data)
   return(
     <div>
+      {
+        data.allContentfulContentType.edges.map(edge => {
+          const node = edge.node
+          console.log(node.name)
+          return(
+            <div key={node.name}>
+              <h1>{node.name}</h1>
+              <p>{node.description}</p>
+            </div>
+          )
+        })
+      }
       <h1>Welcome!</h1>
       <a href="/copy">Check out this page!</a>
       <p>By the way, this is probably what the home page of the website will be.</p>
