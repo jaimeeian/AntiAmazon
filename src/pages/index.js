@@ -4,12 +4,15 @@ import {graphql, Link, useStaticQuery  } from "gatsby"
 export default function Home() {
 
   const data = useStaticQuery(graphql`
-  query {
-    allContentfulContentType {
+  query MyQuery {
+    allContentfulTopic {
       edges {
         node {
-          name
-          description
+          title
+          body {
+            json
+          }
+          slug
         }
       }
     }
@@ -18,18 +21,20 @@ export default function Home() {
   console.log(data)
   return(
     <div>
+      <ul>
       {
-        data.allContentfulContentType.edges.map(edge => {
+        data.allContentfulTopic.edges.map(edge => {
           const node = edge.node
           console.log(node.name)
           return(
-            <div key={node.name}>
-              <h1>{node.name}</h1>
-              <p>{node.description}</p>
-            </div>
+            <li key = {node.name}>
+              <Link to = {`/${node.slug}`}>
+                {node.title}
+                </Link> 
+            </li>
           )
         })
-      }
+      } </ul>
       <h1>Welcome!</h1>
       <a href="/copy">Check out this page!</a>
       <p>By the way, this is probably what the home page of the website will be.</p>
