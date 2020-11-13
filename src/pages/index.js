@@ -1,6 +1,9 @@
 import React from "react"
-import {graphql, Link, useStaticQuery  } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 
+/**
+ * Home page component
+ */
 export default function Home() {
 
   const data = useStaticQuery(graphql`
@@ -25,16 +28,16 @@ export default function Home() {
       {
         data.allContentfulTopic.edges.map(edge => {
           const node = edge.node
-          console.log(node.name)
           return(
-            <li key = {node.name}>
-              <Link to = {`/${node.slug}`}>
+            <li key={node.name}>
+              <Link to={`/${node.slug}`}>
                 {node.title}
-                </Link> 
+              </Link> 
             </li>
           )
         })
-      } </ul>
+      }
+      </ul>
       <h1>Welcome!</h1>
       <a href="/copy">Check out this page!</a>
       <p>By the way, this is probably what the home page of the website will be.</p>

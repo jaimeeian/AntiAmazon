@@ -1,8 +1,15 @@
+/* Import the path module */
 const path = require("path")
 
-module.exports.createPages = async ({graphql,actions}) => {
-    const {createPage} = actions 
+/* Use Gatsby's createPages API to dynamically create
+ * pages on the site for every topic  
+*/
+module.exports.createPages = async ({ graphql, actions }) => {
+    // Help get the necessary data to call createPages
+    const { createPage } = actions 
     const template = path.resolve("./src/templates/topic.js")
+
+    // Query the topics from Contentful
     const response = await graphql(`
     query MyQuery {
         allContentfulTopic {
@@ -17,10 +24,12 @@ module.exports.createPages = async ({graphql,actions}) => {
           }
         }
       }`)
+
+      // Create pages for every node in the Topic content type.
       response.data.allContentfulTopic.edges.forEach(edge => {
           createPage({
-              component: template, 
-              path: `/${edge.node.slug}`,
+              component: template,  // the page template to use
+              path: `/${edge.node.slug}`, // the slug to create the page at
               context: {
                   slug: edge.node.slug 
               }
