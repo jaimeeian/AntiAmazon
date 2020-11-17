@@ -1,10 +1,22 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
-    purge: [
-      './src/**/*.html',
-      './src/**/*.js',
-      './src/**/*.jsx',
-    ],
-    theme: {},
+    purge: {
+      mode: 'all',
+      content: [
+        './src/**/*.html',
+        './src/**/*.js',
+        './src/**/*.jsx',
+      ]
+    },
+    theme: {
+      fontFamily: {
+        ...defaultTheme.fontFamily,
+        'sans': ['Epilogue', ...defaultTheme.fontFamily.sans],
+      }
+    },
     variants: {},
-    plugins: [],
+    plugins: [
+      require('@tailwindcss/typography'),
+    ],
 }

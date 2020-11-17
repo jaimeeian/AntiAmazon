@@ -25,14 +25,14 @@ module.exports.createPages = async ({ graphql, actions }) => {
         }
       }`)
 
-      // Create pages for every node in the Topic content type.
+      // Create pages for every node in the Topic content type
       response.data.allContentfulTopic.edges.forEach(edge => {
           createPage({
-              component: template,  // the page template to use
-              path: `/${edge.node.slug}`, // the slug to create the page at
-              context: {
-                  slug: edge.node.slug 
-              }
+            component: template,  // the page template to use
+            path: `/${edge.node.slug}`, // the slug to create the page at
+            context: {
+                slug: edge.node.slug 
+            }
           })
-        })
+      })
 }

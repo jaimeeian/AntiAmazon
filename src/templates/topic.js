@@ -4,10 +4,9 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 /**
  * Topic page component.
- * Retrieves data from Contentful via GraphQL and
- * returns the page as JSX.
+ * Returns a topic page using data queried from Contentful.
  */
-export default function Topic (){
+export default function Topic() {
     const data = useStaticQuery(graphql`
     query(
         $slug: String
@@ -17,11 +16,11 @@ export default function Topic (){
                 eq: $slug
             }
         ) {
-              title
-              body {
+            title
+            body {
                 json
-              }
-              slug
+            }
+            slug
         }
       }
     `)
@@ -30,8 +29,6 @@ export default function Topic (){
         title,
         body
     } = data.contentfulTopic
-
-    console.log(body.json)
 
     return(
         <div>
