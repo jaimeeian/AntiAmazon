@@ -3,6 +3,7 @@ import { graphql, Link, useStaticQuery } from "gatsby"
 
 // Import components
 import Layout from "../components/Layout/Layout"
+import TableOfContents from "../components/TableOfContents/TableOfContents"
 
 /**
  * Home page.
@@ -31,6 +32,7 @@ export default function Home() {
   return(
     <Layout>
       <h3>Table of Contents</h3>
+      <TableOfContents />
       <ul>
       {
         data.allContentfulTopic.edges.map(edge => {
