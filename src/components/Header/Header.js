@@ -1,10 +1,17 @@
 import React from "react";
 
-export default function Header() {
-    const name = "Richard"
-
+export default function Header() {    
     return (
-        <div id={name} className="text-lg bg-gray-500">
-        </div>
-    )
+    <div className="py-4">
+        <span>Anti-Amazon Shopper</span>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>Why not Amazon?</li>
+                <li>Download the extension</li>
+            </ul>
+        </nav>
+    </div>
+    
+)
 }
