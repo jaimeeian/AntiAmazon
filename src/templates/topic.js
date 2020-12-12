@@ -3,6 +3,7 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 import Layout from '../components/Layout/Layout'
+import SearchBar from '../components/SearchBar/SearchBar'
 import OtherTopics from '../components/OtherTopics/OtherTopics'
 
 /**
@@ -24,21 +25,25 @@ export default function Topic() {
                 json
             }
             slug
+            tags
         }
       }
     `)
 
     const {
         title,
-        body
+        body,
+        tags
     } = data.contentfulTopic
 
+    /** @todo create SEO component containing title and description metadata */
     return(
         <Layout>
+            <SearchBar />
             <h1>{title}</h1>
             { documentToReactComponents(body.json) }
             <hr />
-            <OtherTopics />
+            <OtherTopics tags={tags} />
             <Link to="/">Back to the home page</Link>
         </Layout> 
     )

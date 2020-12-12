@@ -1,11 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 
-function SearchBar({ value, onChange }) {
-    return(
-        <input type="text" classname="" value={value} onChange={onChange} placeholder="search here..." />
-    )
-}
+import SearchBar from '../SearchBar/SearchBar'
 
 export default function TableOfContents() {
     const [ query, setQuery ] = useState('')
@@ -20,7 +16,7 @@ export default function TableOfContents() {
                     query && exampleSearchResults.map(result => {
                         return(
                             <li>
-                                <Link to="/">result</Link>
+                                <Link to="/" className="text-blue-500 hover:underline">result</Link>
                             </li>
                         )
                     })

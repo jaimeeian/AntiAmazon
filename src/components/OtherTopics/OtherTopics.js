@@ -1,5 +1,6 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
+
 /**
  * @todo Implement "tag system" for posts
  * Assign relevant tags to each post in Contentful, e.g. "Bezos", "labor rights", "working conditions"
@@ -11,7 +12,23 @@ import { graphql, Link } from "gatsby"
  * 
  * Simple implementation: list up to four related posts that are NOT the current post
  */
-export default function OtherTopics() {
+export default function OtherTopics({ tags }) {
+
+    // const data = useStaticQuery(graphql`
+    //     query (
+    //         $tags: [String!]!
+    //     ) {
+    //         allContentfulTopic(filter: {tags: {eq: $tags}}) {
+    //             edges {
+    //                 node {
+    //                     title
+    //                     tags
+    //                 }
+    //             }
+    //         }
+    //     }
+    // `)
+
     const placeholderOfOtherTopics = [
         '/', '/', '/', '/', '/', 
     ]

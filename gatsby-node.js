@@ -20,6 +20,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
                 json
               }
               slug
+              tags
             }
           }
         }
@@ -31,7 +32,8 @@ module.exports.createPages = async ({ graphql, actions }) => {
             component: template,  // the page template to use
             path: `/${edge.node.slug}`, // the slug to create the page at
             context: {
-                slug: edge.node.slug 
+                slug: edge.node.slug,
+                tags: edge.node.tags
             }
           })
       })
