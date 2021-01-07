@@ -3,7 +3,7 @@ import { graphql, Link, useStaticQuery } from "gatsby"
 
 export default function Footer() {
     return(
-        <div className="bg-blue text-white">
+        <div className="bg-gray-100 text-white">
             <ul className="list-none">
                 <li className="font-bold">Anti-Amazon shopper</li>
 
