@@ -9,7 +9,7 @@ export default function Header() {
             <button className={"inline-block"} onClick = {() => setMenu(!menuIsOpen)}>
                 toggle menu
             </button>
-            <ul className={menuIsOpen? "list-outside font-light" : "hidden"}>
+            <ul className={menuIsOpen? "list-outside font-light list-none" : "hidden"}>
                 <li>Home</li>
                 <li>Why not Amazon?</li>
                 <li className="bg-red-500 text-white font-medium bg-opacity-75">Download the extension</li>
