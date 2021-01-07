@@ -39,7 +39,8 @@ export default function Topic() {
     /** @todo create SEO component containing title and description metadata */
     return(
         <Layout>
-            <SearchBar />
+            <Link to="/" className="inline-block mb-4 hover:text-blue-500">&larr; Back to home</Link>
+            <SearchBar className="mb-4" />
             <h1>{title}</h1>
             { documentToReactComponents(body.json) }
             <hr />

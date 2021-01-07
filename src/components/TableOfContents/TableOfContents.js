@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import SearchBar from '../SearchBar/SearchBar'
 
@@ -7,6 +7,20 @@ export default function TableOfContents() {
     const [ query, setQuery ] = useState('')
 
     const exampleSearchResults = ['An article', 'Another article', 'A third article']
+
+    const searchResults = useStaticQuery(graphql`
+    query MyQuery ($query: String) {
+        allContentfulTopic(filter: {title: {eq: $query}}) {
+          edges {
+            node {
+              title
+              slug
+            }
+          }
+        }
+      }
+      
+    `)
 
     return(
         <nav>
@@ -16,7 +30,7 @@ export default function TableOfContents() {
                     query && exampleSearchResults.map(result => {
                         return(
                             <li>
-                                <Link to="/" className="text-blue-500 hover:underline">result</Link>
+                                <Link to="/" className="text-blue-500 hover:underline">{result}</Link>
                             </li>
                         )
                     })
