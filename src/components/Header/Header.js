@@ -6,7 +6,7 @@ export default function Header() {
     <div className="bg-gray-50 font-semibold py-4">
         <span>Anti-Amazon Shopper</span>
         <nav>
-            <button className={"inline-block"} onClick = {() => setMenu(!menuIsOpen)}>
+            <button className="inline-block inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" onClick = {() => setMenu(!menuIsOpen)}>
                 toggle menu
             </button>
             <ul className={menuIsOpen? "list-outside font-light list-none" : "hidden"}>
