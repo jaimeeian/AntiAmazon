@@ -4,9 +4,11 @@ import Footer from '../Footer/Footer'
 
 export default function Layout ({children}) {
     return(
-        <div className="container mx-auto xs:mx-10 sm:mx-10 prose bg-gray-100 min-h-screen px-4">
+        <div className="container mx-auto xs:mx-10 sm:mx-10 bg-gray-100 min-h-screen px-4">
             <Header />
-            {children}
+                <div className="prose">
+                    {children}
+                </div>
             <Footer />
         </div>
     )
