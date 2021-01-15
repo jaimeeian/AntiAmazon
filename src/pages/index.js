@@ -14,7 +14,7 @@ export default function Home() {
    * @todo add Contentful page for home page introduction, then query it here
    */
   const data = useStaticQuery(graphql`
-  query MyQuery {
+  query {
     allContentfulTopic {
       edges {
         node {
