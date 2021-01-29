@@ -43,6 +43,18 @@ export default function Topic() {
             <SearchBar className="mb-4" />
             <article className="prose">
                 <h1>{title}</h1>
+                <span className="text-sm">Tags: </span>
+                {
+                    tags.map((tag, i) => 
+                        <Link 
+                            key={`topic-tag--${tag}`} 
+                            to="/" 
+                            className="inline text-sm text-gray-600 hover:text-blue-500"
+                        >
+                            { tag + (i < tags.length - 1 ? ', ' : '') }
+                        </Link> 
+                    )
+                }
                 { documentToReactComponents(body.json) }
             </article>
             <hr />
