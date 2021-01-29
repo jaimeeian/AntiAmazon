@@ -41,8 +41,10 @@ export default function Topic() {
         <Layout>
             <Link to="/" className="inline-block mb-4 hover:text-blue-500">&larr; Back to home</Link>
             <SearchBar className="mb-4" />
-            <h1>{title}</h1>
-            { documentToReactComponents(body.json) }
+            <article className="prose">
+                <h1>{title}</h1>
+                { documentToReactComponents(body.json) }
+            </article>
             <hr />
             <OtherTopics tags={tags} />
             <Link to="/">Back to the home page</Link>

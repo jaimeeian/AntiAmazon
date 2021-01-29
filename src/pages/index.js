@@ -11,7 +11,7 @@ export default function Home() {
   /** @todo add Contentful page for home page introduction, then query it here */
   return(
     <Layout>
-      <article>
+      <article className="prose">
         <h1>The Case Against Amazon</h1>
         <a href="/copy">Check out this page!</a>
         <p>By the way, this is probably what the home page of the website will be.</p>
