@@ -34,7 +34,7 @@ export default function OtherTopics({ tags }) {
     ]
     return(
         <aside>
-            <h2>Other topics</h2>
+            <h2 className="text-2xl font-bold">Other topics</h2>
             <ul className="text-blue-600 space-y-3">
                 {
                     placeholderOfOtherTopics.map(topic => {
