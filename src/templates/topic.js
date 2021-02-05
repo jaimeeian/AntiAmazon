@@ -41,7 +41,7 @@ export default function Topic() {
         <Layout>
             <Link to="/" className="inline-block mb-4 hover:text-blue-500">&larr; Back to home</Link>
             <SearchBar className="mb-4" />
-            <article className="prose">
+            <article className="prose mb-4">
                 <h1>{title}</h1>
                 <span className="text-sm">Tags: </span>
                 {
@@ -58,8 +58,8 @@ export default function Topic() {
                 { documentToReactComponents(body.json) }
             </article>
             <hr />
-            <OtherTopics tags={tags} />
-            <Link to="/">Back to the home page</Link>
+            <OtherTopics current={title} tags={tags}  />
+            <Link to="/" className="inline-block my-4 hover:text-blue-500">&larr; Back to home</Link>
         </Layout> 
     )
 }

@@ -1,49 +1,45 @@
 import React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 
-/**
- * @todo Implement "tag system" for posts
- * Assign relevant tags to each post in Contentful, e.g. "Bezos", "labor rights", "working conditions"
- *      Maybe derive tags from a pre-defined set of categories that we think would be appropriate
- * Then, query similar posts via GraphQL
- * https://significa.co/blog/advanced-blog-system-in-gatsby
- * https://nimblewebdeveloper.com/blog/gatsby-generate-related-posts-at-build-time
- * https://khalilstemmler.com/articles/gatsby-related-posts-component/
- * 
- * Simple implementation: list up to four related posts that are NOT the current post
- */
-export default function OtherTopics({ tags }) {
+export default function OtherTopics({ current, tags }) {
+    const data = useStaticQuery(graphql`
+        query topicsByTags {
+            allContentfulTopic {
+                edges {
+                    node {
+                        tags
+                        slug
+                        title
+                    }
+                }
+            }
+        }
+    `)
 
-    // const data = useStaticQuery(graphql`
-    //     query (
-    //         $tags: [String!]!
-    //     ) {
-    //         allContentfulTopic(filter: {tags: {eq: $tags}}) {
-    //             edges {
-    //                 node {
-    //                     title
-    //                     tags
-    //                 }
-    //             }
-    //         }
-    //     }
-    // `)
+    /**
+     * Returns an array of 0-3 pages whose tags match the current page's tags.
+     * @todo: should probably rewrite the filter() callback function to be declarative
+     */
+    const otherTopics = data.allContentfulTopic.edges.filter(({node}) => {
+        for (const tag of tags) {
+            if (!(node.title === current) && node.tags.includes(tag)) return true
+        }
+        return false
+    }).map(edge => ({ slug: edge.node.slug, title: edge.node.title }))
+      .slice(0, 3)
 
-    const placeholderOfOtherTopics = [
-        '/', '/', '/', '/', '/', 
-    ]
     return(
         <aside>
             <h2 className="text-2xl font-bold">Other topics</h2>
             <ul className="text-blue-600 space-y-3">
                 {
-                    placeholderOfOtherTopics.map(topic => {
-                        return(
-                            <li>
-                                <Link to={topic} className="underline hover:text-blue-500">This is a link</Link>
-                            </li>
-                        )
-                    })
+                    otherTopics.map(topic => 
+                        <li key={`other-topic--${topic.slug}`}>
+                            <Link to={'/' + topic.slug} className="underline hover:text-blue-500">
+                                {topic.title}
+                            </Link>
+                        </li>
+                    )
                 }
             </ul>
         </aside>
