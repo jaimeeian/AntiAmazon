@@ -3,8 +3,8 @@ import React from "react";
 export default function Header() {
     const [menuIsOpen, setMenu] = React.useState(false)
     return (
-        <div className="bg-gray-50 font-semibold py-4">
-            <nav class="bg-gray-800">
+        <div className="bg-gray-200 font-semibold py-4">
+            <nav class>
                 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                     <div class="relative flex items-center justify-between h-16">
                         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -40,8 +40,8 @@ export default function Header() {
                             <div class="hidden sm:block sm:ml-6">
                                 <div class="flex space-x-4">
                                 {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                                <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Why not Amazon?</a>
+                                <a href="#" class="px-3 py-2 font-semibold text-sm font-medium border-b-2 border-black">Home</a>
+                                <a href="#" class="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Why not Amazon?</a>
                                 <a href="#" class="bg-red-500 text-white font-medium bg-opacity-75 hover:bg-red-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Download the extension</a>
                             </div>
                         </div>
