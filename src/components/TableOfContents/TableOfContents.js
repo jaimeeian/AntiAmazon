@@ -5,6 +5,7 @@ import SearchBar from '../SearchBar/SearchBar'
 
 export default function TableOfContents() {
     const [ query, setQuery ] = useState('')
+    const [ activeTab, setActiveTab ] = useState('articles')
     const data = useStaticQuery(graphql`
     query {
         allContentfulTopic {
@@ -29,11 +30,20 @@ export default function TableOfContents() {
         ? data.allContentfulTopic.edges.filter(edge => edge.node.title.toLowerCase().includes(query.toLowerCase()))
         : data.allContentfulTopic.edges
 
+    const tabClass = `border-b-1 hover:border-blue-400 hover:text-blue-400`
+    const inactiveTabClass = `border-transparent`
+    const activeTabClass = `border-blue-600 text-blue-600`
+
     return(
         <nav className="space-y-4">
             <h2 className="text-2xl font-bold mb-2">Table of Contents</h2>
             <SearchBar value={query} onChange={e => setQuery(e.target.value)} placeholder="Search by topic..." />
-            <ul className="list-none space-y-4">
+            <div className="flex justify-around">
+                <div className={tabClass + (activeTab === 'articles' ? activeTabClass : inactiveTabClass) } onClick={() => setActiveTab('articles')}>Articles</div>
+                <div className={tabClass + (activeTab === 'tags' ? activeTabClass : inactiveTabClass) } onClick={() => setActiveTab('tags')}>Tags</div>
+            </div>
+            <div>
+                <ul className="list-none space-y-4">
                 {
                     resultsToRender 
                         ? resultsToRender.map(edge => {
@@ -55,7 +65,9 @@ export default function TableOfContents() {
                             })
                         : <em className="text-gray-600">We couldn't find anything matching your search query.</em>
                 }
-            </ul>
+                </ul>
+            </div>
+            
         </nav>
     )
 }
