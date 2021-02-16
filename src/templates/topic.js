@@ -38,10 +38,10 @@ export default function Topic() {
 
     /** @todo create SEO component containing title and description metadata */
     return(
-        <Layout>
-            <Link to="/" className="inline-block mb-4 hover:text-blue-500">&larr; Back to home</Link>
-            <SearchBar className="mb-4" />
-            <article className="prose mb-4">
+        <Layout className="space-y-8">
+            <Link to="/" className="inline-block text-blue-500 hover:underline">&larr; Back to home</Link>
+            <SearchBar />
+            <article className="prose">
                 <h1>{title}</h1>
                 <span className="text-sm">Tags: </span>
                 {
@@ -49,7 +49,7 @@ export default function Topic() {
                         <Link 
                             key={`topic-tag--${tag}`} 
                             to="/" 
-                            className="inline text-sm text-gray-600 hover:text-blue-500"
+                            className="inline text-sm text-blue-500 hover:underline"
                         >
                             { tag + (i < tags.length - 1 ? ', ' : '') }
                         </Link> 
