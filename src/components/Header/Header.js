@@ -76,7 +76,7 @@ export default function Header() {
 
     Menu open: "block", Menu closed: "hidden"
   */}
-                <div class= {menuIsOpen ? "sm:block sm:ml-6" : "hidden"}>
+                <div class= {menuIsOpen ? "sm:block sm:ml-6" : "hidden md:visible"}>
                     <div class="flex flex-col space-y-4">
                         {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                         <a href="#" class="px-3 py-2 font-semibold text-sm font-medium border-b-2 border-black">Home</a>
