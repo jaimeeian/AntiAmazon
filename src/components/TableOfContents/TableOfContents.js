@@ -3,6 +3,7 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 import classNames from 'classnames'
 
 import SearchBar from '../SearchBar/SearchBar'
+import Tags from './Tags/Tags'
 
 export default function TableOfContents() {
     const [ query, setQuery ] = useState('')
@@ -22,6 +23,8 @@ export default function TableOfContents() {
     }
     `)
 
+    const { edges } = data.allContentfulTopic
+
     /**
      * Returns results that include query
      * @todo Return results through more sophisticated search methods, e.g.:
@@ -29,13 +32,9 @@ export default function TableOfContents() {
      *      - filter by tags in addition to title
      */
     const resultsToRender = data
-        ? data.allContentfulTopic.edges.filter(edge => edge.node.title.toLowerCase().includes(query.toLowerCase()))
-        : data.allContentfulTopic.edges
-
-    const tagResultsToRender = data
-        ? data.allContentfulTopic.edges
-        : data.allContentfulTopic.edges
-    console.log(tagResultsToRender)
+        ? edges.filter(edge => 
+            edge.node.title.toLowerCase().includes(query.toLowerCase()))
+        : edges
 
     /**
      * @return Classes for the tabs.
@@ -52,31 +51,28 @@ export default function TableOfContents() {
             <h2 className="text-2xl font-bold mb-2">Table of Contents</h2>
             <SearchBar value={query} onChange={e => setQuery(e.target.value)} placeholder="Search by topic..." />
             {
-                query && resultsToRender ? resultsToRender.map(edge => {
-                    const { node } = edge
-                    const { title, slug, tags } = node
-                    return(
-                        <li key={title}>
-                            <Link 
-                                to={`/${slug}`} 
-                                className="underline text-blue-500 block"
-                            >
-                                {title}
-                            </Link>
-                            {
-                                tags.map((tag, i) => 
-                                    <Link
-                                        key={title + tag}
-                                        className="inline-block text-sm text-gray-600 hover:text-blue-500"
-                                        to="/"
+                query && 
+                    <ul className="list-none space-y-2">{
+                        resultsToRender ? resultsToRender.map(edge => {
+                            const { node } = edge
+                            const { title, slug, tags } = node
+                            return(
+                                <li
+                                    key={title}
+                                    className="rounded bg-gray-300 p-4"
+                                >
+                                    <Link 
+                                        to={`/${slug}`} 
+                                        className="underline text-blue-500 block"
                                     >
-                                        { tag + (i < tags.length - 1 ? ', ' : '') }
-                                    </Link> 
-                                )
-                            }
-                        </li>
-                    )
-                }) : <em className="text-gray-600">We couldn't find anything matching your search query.</em>
+                                        {title}
+                                    </Link>
+                                    <Tags tags={tags} title={title} />
+                                </li>
+                            )
+                        }) : <em className="text-gray-600">We couldn't find anything matching your search query.</em>
+                        }
+                    </ul>
             }
             <div className="flex justify-around">
                 <button 
@@ -96,33 +92,21 @@ export default function TableOfContents() {
                     <div>
                         <ul className="list-none space-y-4">
                         {
-                            resultsToRender 
-                                ? resultsToRender.map(edge => {
-                                        const { node } = edge
-                                        const { title, slug, tags } = node
-                                        return(
-                                            <li key={title}>
-                                                <Link 
-                                                    to={`/${slug}`} 
-                                                    className="underline text-blue-500 block"
-                                                >
-                                                    {title}
-                                                </Link>
-                                                {
-                                                    tags.map((tag, i) => 
-                                                        <Link
-                                                            key={title + tag}
-                                                            className="inline-block text-sm text-gray-600 hover:text-blue-500"
-                                                            to="/"
-                                                        >
-                                                            { tag + (i < tags.length - 1 ? ', ' : '') }
-                                                        </Link> 
-                                                    )
-                                                }
-                                            </li>
-                                        )
-                                    })
-                                : <em className="text-gray-600">We couldn't find anything matching your search query.</em>
+                            edges.map(edge => {
+                                const { node } = edge
+                                const { title, slug, tags } = node
+                                return(
+                                    <li key={title}>
+                                        <Link 
+                                            to={`/${slug}`} 
+                                            className="underline text-blue-500 block"
+                                        >
+                                            {title}
+                                        </Link>
+                                        <Tags tags={tags} title={title} />
+                                    </li>
+                                )
+                            })
                         }
                         </ul>
                     </div>

@@ -5,6 +5,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Layout from '../components/Layout/Layout'
 import SearchBar from '../components/SearchBar/SearchBar'
 import OtherTopics from '../components/OtherTopics/OtherTopics'
+import Tags from '../components/TableOfContents/Tags/Tags'
 
 const HomeLink = () => <Link to="/" className="inline-block text-blue-500 hover:underline">&larr; Back to home</Link>
 
@@ -45,18 +46,7 @@ export default function Topic() {
             <SearchBar />
             <article className="prose container mx-auto">
                 <h1>{title}</h1>
-                <span className="text-sm">Tags: </span>
-                {
-                    tags.map((tag, i) => 
-                        <Link 
-                            key={`topic-tag--${tag}`} 
-                            to="/" 
-                            className="inline text-sm text-blue-500 hover:underline"
-                        >
-                            { tag + (i < tags.length - 1 ? ', ' : '') }
-                        </Link> 
-                    )
-                }
+                Tags: <Tags tags={tags} title={title} />
                 { documentToReactComponents(body.json) }
             </article>
             <hr />

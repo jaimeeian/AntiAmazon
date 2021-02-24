@@ -18,7 +18,7 @@ export default function Home() {
           <p>By the way, this is probably what the home page of the website will be.</p>
           <p>We're doing a lot of cool things here!</p>
         </article>
-        <div className="md:col-span-1">
+        <div className="md:col-span-1 md:overflow-auto">
           <TableOfContents />
         </div>
       </div>

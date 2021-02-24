@@ -6,7 +6,7 @@ export default function SearchBar({value, onChange, placeholder="Search here..."
         <input 
             type="text"
             className={classNames(
-                "block py-3 px-5 rounded-full min-w-full border-black border-1",
+                "block py-3 px-5 rounded-full min-w-full border-black border-1 shadow-sm",
                 className
             )}
             value={value} 
