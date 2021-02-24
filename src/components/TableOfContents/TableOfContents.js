@@ -33,6 +33,10 @@ export default function TableOfContents() {
         : data.allContentfulTopic.edges
 
     const tagResultsToRender = data
+        ? data.allContentfulTopic.edges
+        : data.allContentfulTopic.edges
+    console.log(tagResultsToRender)
+
     /**
      * @return Classes for the tabs.
      * @param {boolean} isActive a boolean that evaluates to true when the current tab is active.
@@ -44,9 +48,36 @@ export default function TableOfContents() {
     )
 
     return(
-        <nav className="space-y-4">
+        <nav className="space-y-4 max-w-md">
             <h2 className="text-2xl font-bold mb-2">Table of Contents</h2>
             <SearchBar value={query} onChange={e => setQuery(e.target.value)} placeholder="Search by topic..." />
+            {
+                query && resultsToRender ? resultsToRender.map(edge => {
+                    const { node } = edge
+                    const { title, slug, tags } = node
+                    return(
+                        <li key={title}>
+                            <Link 
+                                to={`/${slug}`} 
+                                className="underline text-blue-500 block"
+                            >
+                                {title}
+                            </Link>
+                            {
+                                tags.map((tag, i) => 
+                                    <Link
+                                        key={title + tag}
+                                        className="inline-block text-sm text-gray-600 hover:text-blue-500"
+                                        to="/"
+                                    >
+                                        { tag + (i < tags.length - 1 ? ', ' : '') }
+                                    </Link> 
+                                )
+                            }
+                        </li>
+                    )
+                }) : <em className="text-gray-600">We couldn't find anything matching your search query.</em>
+            }
             <div className="flex justify-around">
                 <button 
                     className={tabClasses(activeTab === 'articles')}
@@ -100,7 +131,9 @@ export default function TableOfContents() {
             {
                 activeTab === 'tags' &&
                 <div id="tags-toc">
-
+                    {
+                        
+                    }
                 </div>
             }
         </nav>

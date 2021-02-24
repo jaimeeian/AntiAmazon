@@ -6,6 +6,8 @@ import Layout from '../components/Layout/Layout'
 import SearchBar from '../components/SearchBar/SearchBar'
 import OtherTopics from '../components/OtherTopics/OtherTopics'
 
+const HomeLink = () => <Link to="/" className="inline-block text-blue-500 hover:underline">&larr; Back to home</Link>
+
 /**
  * Topic page component.
  * Returns a topic page using data queried from Contentful.
@@ -39,9 +41,9 @@ export default function Topic() {
     /** @todo create SEO component containing title and description metadata */
     return(
         <Layout className="space-y-8">
-            <Link to="/" className="inline-block text-blue-500 hover:underline">&larr; Back to home</Link>
+            <HomeLink />
             <SearchBar />
-            <article className="prose">
+            <article className="prose container mx-auto">
                 <h1>{title}</h1>
                 <span className="text-sm">Tags: </span>
                 {
@@ -59,7 +61,7 @@ export default function Topic() {
             </article>
             <hr />
             <OtherTopics current={title} tags={tags}  />
-            <Link to="/" className="inline-block my-4 hover:text-blue-500">&larr; Back to home</Link>
+            <HomeLink />
         </Layout> 
     )
 }

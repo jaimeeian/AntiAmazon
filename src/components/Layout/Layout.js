@@ -5,10 +5,10 @@ import classNames from 'classnames'
 
 export default function Layout ({ children, className="" }) {
     return(
-        <div className="container mx-auto xs:mx-10 sm:mx-10 bg-gray-100 min-h-screen">
+        <div className="bg-gray-100 min-h-screen d-flex">
             <Header />
             <div className={classNames(
-                "px-4 py-8",
+                "px-4 lg:px-8 py-8",
                 className
             )}>
                 { children }
