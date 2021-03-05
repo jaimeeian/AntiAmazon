@@ -1,11 +1,10 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import Layout from '../components/Layout/Layout'
-import TableOfContents from '../components/TableOfContents/TableOfContents'
+import LayoutWithTOC from '../components/Layout/LayoutWithTOC'
 
 export default function PageNotFound() {
     return(
-        <Layout>
+        <LayoutWithTOC>
             <article className="container mx-auto prose">
                 <h1>Page not found</h1>
                 <p>We couldn’t find the page that you were looking for. Double check the URL you entered, then try again.</p>
@@ -20,7 +19,7 @@ export default function PageNotFound() {
                     </ul>
                 </p>
             </article>
-        </Layout>
+        </LayoutWithTOC>
         
     )
 }

@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-import Layout from '../components/Layout/Layout'
+import LayoutWithTOC from '../components/Layout/LayoutWithTOC'
 import SearchBar from '../components/SearchBar/SearchBar'
 import OtherTopics from '../components/OtherTopics/OtherTopics'
 import Tags from '../components/TableOfContents/Tags/Tags'
@@ -41,10 +41,9 @@ export default function Topic() {
 
     /** @todo create SEO component containing title and description metadata */
     return(
-        <Layout className="space-y-8">
+        <LayoutWithTOC className="space-y-8">
             <HomeLink />
-            <SearchBar />
-            <article className="prose container mx-auto">
+            <article className="prose">
                 <h1>{title}</h1>
                 Tags: <Tags tags={tags} title={title} />
                 { documentToReactComponents(body.json) }
@@ -52,6 +51,6 @@ export default function Topic() {
             <hr />
             <OtherTopics current={title} tags={tags}  />
             <HomeLink />
-        </Layout> 
+        </LayoutWithTOC> 
     )
 }
