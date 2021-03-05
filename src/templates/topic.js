@@ -3,7 +3,6 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 import LayoutWithTOC from '../components/Layout/LayoutWithTOC'
-import SearchBar from '../components/SearchBar/SearchBar'
 import OtherTopics from '../components/OtherTopics/OtherTopics'
 import Tags from '../components/TableOfContents/Tags/Tags'
 
