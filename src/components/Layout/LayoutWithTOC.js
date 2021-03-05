@@ -9,7 +9,7 @@ import TableOfContents from '../TableOfContents/TableOfContents'
 export default function LayoutWithTOC({ children, className }) {
     return (
         <Layout>
-            <div className={"grid md:grid-cols-3 gap-12"}>
+            <div className="grid md:grid-cols-3 gap-12">
                 <div className={classNames("md:col-span-2 md:col-start-2", className)}>
                     { children }
                 </div>

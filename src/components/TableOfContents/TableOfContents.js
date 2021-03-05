@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import SearchBar from '../SearchBar/SearchBar'
 import Tags from './Tags/Tags'
+import { getAllUniqueTags } from '../../util/tagFunctions'
 
 export default function TableOfContents() {
     const [ query, setQuery ] = useState('')
@@ -12,18 +13,16 @@ export default function TableOfContents() {
     const data = useStaticQuery(graphql`
     query {
         allContentfulTopic {
-            edges {
-                node {
-                    title
-                    slug
-                    tags
-                }
+            nodes {
+                title
+                slug
+                tags
             }
         }
     }
     `)
 
-    const { edges } = data.allContentfulTopic
+    const { nodes } = data.allContentfulTopic
 
     /**
      * Returns results that include query
@@ -32,29 +31,31 @@ export default function TableOfContents() {
      *      - filter by tags in addition to title
      */
     const resultsToRender = data
-        ? edges.filter(edge => 
-            edge.node.title.toLowerCase().includes(query.toLowerCase()))
-        : edges
+        ? nodes.filter(node => 
+            node.title.toLowerCase().includes(query.toLowerCase()))
+        : nodes
 
     /**
      * @return Classes for the tabs.
      * @param {boolean} isActive a boolean that evaluates to true when the current tab is active.
      */
     const tabClasses = (isActive) => classNames(
-        `p-2 border-b-2 border-transparent`,
+        `py-2 px-8 border-b-2 border-transparent text-align-center`,
         !isActive && `hover:border-blue-400 hover:bg-gray-300`,
         isActive && `border-blue-600 text-blue-600`
     )
 
+    const allTags = getAllUniqueTags(nodes)
+
     return(
         <nav className="space-y-4 max-w-md">
             <h2 className="text-2xl font-bold mb-2">Table of Contents</h2>
+            <Link to="/toc" className="block text-sm">Browse all articles</Link>
             <SearchBar value={query} onChange={e => setQuery(e.target.value)} placeholder="Search by topic..." />
             {
                 query && 
                     <ul className="list-none space-y-2">{
-                        resultsToRender ? resultsToRender.map(edge => {
-                            const { node } = edge
+                        resultsToRender && resultsToRender.length > 0 ? resultsToRender.map(node => {
                             const { title, slug, tags } = node
                             return(
                                 <li
@@ -70,7 +71,7 @@ export default function TableOfContents() {
                                     <Tags tags={tags} title={title} />
                                 </li>
                             )
-                        }) : <em className="text-gray-600">We couldn't find anything matching your search query.</em>
+                        }) : <em className="text-gray-600 break-all">We couldn't find any articles matching "{query}".</em>
                         }
                     </ul>
             }
@@ -92,8 +93,7 @@ export default function TableOfContents() {
                     <div>
                         <ul className="list-none space-y-4">
                         {
-                            edges.map(edge => {
-                                const { node } = edge
+                            nodes.map(node => {
                                 const { title, slug, tags } = node
                                 return(
                                     <li key={title}>
@@ -115,9 +115,21 @@ export default function TableOfContents() {
             {
                 activeTab === 'tags' &&
                 <div id="tags-toc">
-                    {
-                        
-                    }
+                    <ul>
+                        {
+                            allTags.map(tag =>
+                                <li key={`toc-${tag}`}>
+                                    <Link
+                                        to={`/toc#${tag}`}
+                                        className="underline text-blue-500 block"
+                                    >
+                                        {tag}
+                                    </Link>
+                                </li>
+                            )
+                        }
+                    </ul>
+                    
                 </div>
             }
         </nav>

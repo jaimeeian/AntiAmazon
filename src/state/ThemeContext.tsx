@@ -19,6 +19,7 @@ interface ThemeStateContextProps {
 
 type Action =
     | { type: 'SET_DARK_MODE', payload: boolean }
+    | { type: 'TOGGLE_DARK_MODE', payload: undefined }
 
 /**
  * Writes new values to state.
@@ -28,11 +29,15 @@ type Action =
 function themeStateReducer(state: ThemeState, action: Action) {
     const { type, payload } = action
     switch (type) {
-        /* Toggles dark and light modes in the app */
         case 'SET_DARK_MODE':
             return {
                 ...state,
                 darkMode: payload
+            }
+        case 'TOGGLE_DARK_MODE':
+            return {
+                ...state,
+                darkMode: !state.darkMode
             }
         default:
             throw new Error(`${type} isn't a valid action type.`)

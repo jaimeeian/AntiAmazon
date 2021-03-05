@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
-import Layout from '../components/Layout/Layout'
+import LayoutWithTOC from '../components/Layout/LayoutWithTOC'
+import { getAllUniqueTags, getAllTopicsByTag } from '../util/tagFunctions'
 
 export default function TableOfContentsPage() {
     const data = useStaticQuery(graphql`
@@ -16,29 +17,10 @@ export default function TableOfContentsPage() {
     `)
 
     const { nodes } = data.allContentfulTopic
-
-    /**
-     * Returns an array of all of the unique tags across the topic nodes.
-     */
-    const allTags = nodes.reduce((allTags, node) => {
-        let uniqueTags = []
-        for (const tag of node.tags) {
-            if (!allTags?.includes(tag)) {
-                uniqueTags = [...uniqueTags, tag]
-            }
-        }
-        return [...allTags, ...uniqueTags]
-    }, [])
-
-    const allTopicsByTag = allTags.map(tag => {
-        return {
-            tag,
-            topics: nodes.filter(node => node.tags.includes(tag))
-        }
-    })
+    const allTopicsByTag = getAllTopicsByTag(getAllUniqueTags(nodes), nodes)
 
     return (
-        <Layout>
+        <LayoutWithTOC>
             <section className="prose">
                 <h1>All articles</h1>
                 {
@@ -51,19 +33,16 @@ export default function TableOfContentsPage() {
                                     {
                                         topics.map(t => 
                                             <li key={tag + t.title}>
-                                                <Link to={t.slug}>{t.title}</Link>    
+                                                <Link to={'/' + t.slug}>{t.title}</Link>    
                                             </li>
                                         )
                                     }
                                 </ul>
-                                
                             </div>
                         )
-                        
                     })
                 }
             </section>
-            
-        </Layout>
+        </LayoutWithTOC>
     )
 }

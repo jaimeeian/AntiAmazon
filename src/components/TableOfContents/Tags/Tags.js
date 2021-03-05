@@ -18,7 +18,7 @@ const Tags = ({ tags, title }) => (
                     >
                         <Link
                             className="inline-block hover:text-blue-500"
-                            to="/"
+                            to={`/toc#${tag}`}
                         >
                             { tag }
                         </Link>
