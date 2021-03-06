@@ -11,29 +11,27 @@ module.exports.createPages = async ({ graphql, actions }) => {
 
     // Query the topics from Contentful
     const response = await graphql(`
-    query MyQuery {
+      query MyQuery {
         allContentfulTopic {
-          edges {
-            node {
-              title
-              body {
-                json
-              }
-              slug
-              tags
+          nodes {
+            title
+            body {
+              json
             }
+            slug
+            tags
           }
         }
-      }`)
+      }
+      `)
 
       // Create pages for every node in the Topic content type
-      response.data.allContentfulTopic.edges.forEach(edge => {
+      response.data.allContentfulTopic.nodes.forEach(node => {
           createPage({
             component: template,  // the page template to use
-            path: `/${edge.node.slug}`, // the slug to create the page at
+            path: `/${node.slug}`, // the slug to create the page at
             context: {
-                slug: edge.node.slug,
-                tags: edge.node.tags
+                slug: node.slug,
             }
           })
       })

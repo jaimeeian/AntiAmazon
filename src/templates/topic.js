@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link, graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 import LayoutWithTOC from '../components/Layout/LayoutWithTOC'
@@ -12,26 +12,7 @@ const HomeLink = () => <Link to="/" className="inline-block text-blue-500 hover:
  * Topic page component.
  * Returns a topic page using data queried from Contentful.
  */
-export default function Topic() {
-    const data = useStaticQuery(graphql`
-    query(
-        $slug: String
-    ) {
-        contentfulTopic(
-            slug: {
-                eq: $slug
-            }
-        ) {
-            title
-            body {
-                json
-            }
-            slug
-            tags
-        }
-      }
-    `)
-
+export default function Topic({ data }) {
     const {
         title,
         body,
@@ -53,3 +34,22 @@ export default function Topic() {
         </LayoutWithTOC> 
     )
 }
+
+export const query = graphql`
+query(
+    $slug: String
+) {
+    contentfulTopic(
+        slug: {
+            eq: $slug
+        }
+    ) {
+        title
+        body {
+            json
+        }
+        slug
+        tags
+    }
+    }
+`
