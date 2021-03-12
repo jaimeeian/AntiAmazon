@@ -20,11 +20,12 @@ export default function Header() {
                         </div>
                         <div className="flex-1 flex items-center justify-center sm:items-stretch md:justify-start">
                             <div className="flex-shrink-0 flex items-center">
-                                <span>Anti-Amazon Shopper</span>
+                                <Link to="/">Anti-Amazon Shopper</Link>
                             </div>
                         </div>
                         <div className="flex flex-row space-y-4 hidden md:block">
-                            <Link to="#" className="px-3 py-2 font-semibold text-sm font-medium border-b-2 border-black">Home</Link>
+                            <Link to="/" className="px-3 py-2 font-semibold text-sm font-medium border-b-2 border-black">Home</Link>
+                            <Link to="/about" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                             <Link to="#" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Why not Amazon?</Link>
                             <Link to="#" className="bg-red-500 text-white font-medium bg-opacity-75 hover:bg-red-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Download the extension</Link>
                         </div>
@@ -41,7 +42,8 @@ export default function Header() {
                 </div>
                 <div className={menuIsOpen ? "md:hidden sm:block sm:ml-6" : "hidden"}>
                     <div className="flex flex-col space-y-4">
-                        <Link to="#" className="px-3 py-2 font-semibold text-sm font-medium border-black">Home</Link>
+                        <Link to="/" className="px-3 py-2 font-semibold text-sm font-medium border-black">Home</Link>
+                        <Link to="/about" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                         <Link to="#" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Why not Amazon?</Link>
                         <Link to="#" className="bg-red-500 text-white font-medium bg-opacity-75 hover:bg-red-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Download the extension</Link>
                     </div>
