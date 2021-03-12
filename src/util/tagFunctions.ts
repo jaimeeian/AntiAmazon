@@ -38,3 +38,9 @@ export const getAllTopicsByTag = (tags: string[], nodes: Node[]) => {
         }
     }
 )}
+
+export const sortAllTopicsByTag = (tags: string[], nodes: Node[]) => {
+    return tags.map(tag => ({
+        [tag]: nodes.filter(node => node.tags.includes(tag))
+    }))
+}

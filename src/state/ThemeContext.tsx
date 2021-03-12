@@ -48,12 +48,16 @@ function themeStateReducer(state: ThemeState, action: Action) {
  * Context and context providers
  */
 
-const ThemeContext = createContext<ThemeStateContextProps>({} as ThemeStateContextProps)
+const initialState = {
+    darkMode: false
+}
+
+const ThemeContext = createContext<ThemeStateContextProps>({
+    state: initialState,
+    dispatch: () => console.log('placeholder dispatch function')
+} as ThemeStateContextProps)
 
 export default function ThemeStateProvider({ children }: React.PropsWithChildren<{}>) {
-    const initialState = {
-        darkMode: false
-    }
     const [ state, dispatch ] = useReducer(themeStateReducer, initialState)
     return (
         <ThemeContext.Provider value={{ state, dispatch }}>
