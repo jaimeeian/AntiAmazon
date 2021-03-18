@@ -2,65 +2,53 @@
  * ThemeContext hook provides information about website's current appearance.
  */
 
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 
-/** 
- * Type definitions for theme state
- */
-
-interface ThemeState {
-    darkMode: boolean
-}
-
-interface ThemeStateContextProps {
-    state: ThemeState,
-    dispatch: React.Dispatch<Action>
-}
-
-type Action =
-    | { type: 'SET_DARK_MODE', payload: boolean }
-    | { type: 'TOGGLE_DARK_MODE', payload: undefined }
-
-/**
- * Writes new values to state.
- * @param {ThemeState} state - previous state of theme
- * @param {Action} action - new action to take, and data payload for that action
- */
-function themeStateReducer(state: ThemeState, action: Action) {
-    const { type, payload } = action
-    switch (type) {
-        case 'SET_DARK_MODE':
-            return {
-                ...state,
-                darkMode: payload
-            }
-        case 'TOGGLE_DARK_MODE':
-            return {
-                ...state,
-                darkMode: !state.darkMode
-            }
-        default:
-            throw new Error(`${type} isn't a valid action type.`)
+function getInitialColorMode (): ThemeState {
+    const persistedColorPreference = window.localStorage.getItem('color-mode');
+    const hasPersistedPreference = typeof persistedColorPreference === 'string';
+    // If the user has explicitly chosen light or dark,
+    // let's use it. Otherwise, this value will be null.
+    if (hasPersistedPreference) {
+      return persistedColorPreference as ThemeState;
     }
+    // If they haven't been explicit, let's check the media
+    // query
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const hasMediaQueryPreference = typeof mql.matches === 'boolean';
+    if (hasMediaQueryPreference) {
+      return mql.matches ? 'dark' : 'light';
+    }
+    // If they are using a browser/OS that doesn't support
+    // color themes, let's default to 'light'.
+    return 'light';
 }
 
 /**
  * Context and context providers
  */
 
-const initialState = {
-    darkMode: false
+type ThemeState = 'dark' | 'light'
+type ThemeContextProps = {
+    colorMode: ThemeState
+    setColorMode: React.Dispatch<ThemeState>
 }
 
-const ThemeContext = createContext<ThemeStateContextProps>({
-    state: initialState,
-    dispatch: () => console.log('placeholder dispatch function')
-} as ThemeStateContextProps)
+export const ThemeContext = createContext<ThemeContextProps>({ 
+    colorMode: 'light', 
+    setColorMode: (v: ThemeState) => console.log("default state") 
+})
 
 export default function ThemeStateProvider({ children }: React.PropsWithChildren<{}>) {
-    const [ state, dispatch ] = useReducer(themeStateReducer, initialState)
+    const [ colorMode, rawSetColorMode ] = useState<ThemeState>(getInitialColorMode())
+
+    const setColorMode = (value: ThemeState) => {
+        rawSetColorMode(value)
+        // Persist it on update
+        window.localStorage.setItem('color-mode', value)
+    }
     return (
-        <ThemeContext.Provider value={{ state, dispatch }}>
+        <ThemeContext.Provider value={{ colorMode, setColorMode }}>
             { children }
         </ThemeContext.Provider>
     )
@@ -78,13 +66,9 @@ export default function ThemeStateProvider({ children }: React.PropsWithChildren
  */
 
 export function useThemeState() {
-    const context = useContext(ThemeContext)
-    if (context === undefined) throw new Error("useThemeState() must be called from within a ThemeProvider component or its descendant.")
-    return context.state
+    return useContext(ThemeContext).colorMode
 }
 
-export function useThemeReducer() {
-    const context = useContext(ThemeContext)
-    if (context === undefined) throw new Error("useThemeReducer() must be called from within a ThemeProvider component or its descendant.")
-    return context.dispatch
+export function setThemeState() {
+    return useContext(ThemeContext).setColorMode
 }

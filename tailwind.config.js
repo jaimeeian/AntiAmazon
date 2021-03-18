@@ -15,6 +15,7 @@ module.exports = {
         'sans': ['Epilogue', ...defaultTheme.fontFamily.sans],
       }
     },
+    darkMode: 'media',
     variants: {},
     plugins: [
       require('@tailwindcss/typography'),

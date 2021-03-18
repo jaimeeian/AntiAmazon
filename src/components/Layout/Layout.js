@@ -9,11 +9,9 @@ import { useThemeState } from '../../state/ThemeContext'
  * Mainly used as a container component for state.
  */
 export default function Layout ({ children, className="" }) {
-    const { darkMode } = useThemeState()
     return(
         <div className={classNames(
-            "bg-gray-100 min-h-screen flex flex-col",
-            darkMode ? `bg-gray-800 text-gray-100` : `bg-gray-100 text-black`
+            "bg-gray-100 min-h-screen flex flex-col dark:bg-gray-800",
         )}>
             <Header />
             <main className={classNames("px-4 lg:px-8 py-8", className)}>
