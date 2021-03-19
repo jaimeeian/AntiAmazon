@@ -23,11 +23,11 @@ export default function Header() {
                                 <Link to="/">Anti-Amazon Shopper</Link>
                             </div>
                         </div>
-                        <div className="flex flex-row space-y-4 hidden md:block">
-                            <Link to="/" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="px-3 py-2 hover:bg-gray-500 hover:text-white text-sm font-medium">Home</Link>
-                            <Link to="/about" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                            <Link to="#" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Why not Amazon?</Link>
-                            <Link to="#" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="bg-red-500 text-white font-medium bg-opacity-75 hover:bg-red-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Download the extension</Link>
+                        <div className="flex flex-row space-y-4 space-x-2 hidden md:block">
+                            <Link to="/" activeClassName="font-semibold border-b-2 border-black" className="px-3 py-2 hover:bg-gray-500 hover:text-white rounded-t-md text-sm font-medium">Home</Link>
+                            <Link to="/about" activeClassName="font-semibold border-b-2 border-black rounded-none" className="px-3 py-2 text-black hover:bg-gray-500 hover:text-white rounded-t-md text-sm font-medium">About</Link>
+                            <Link to="#" activeClassName="font-semibold border-b-2 border-black rounded-none" className="px-3 py-2 text-black hover:bg-gray-500 hover:text-white rounded-t-md text-sm font-medium">Why not Amazon?</Link>
+                            <Link to="#" activeClassName="font-semibold border-b-2 border-black rounded-none" className="px-3 py-2 bg-red-500 text-white font-medium bg-opacity-75 hover:bg-red-600 hover:text-white rounded-md text-sm font-medium">Download the extension</Link>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                             <div className="ml-3 relative">
@@ -42,7 +42,7 @@ export default function Header() {
                 </div>
                 <div className={menuIsOpen ? "md:hidden sm:block sm:ml-6" : "hidden"}>
                     <div className="flex flex-col space-y-4">
-                        <Link to="/" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="px-3 py-2 font-semibold text-sm font-medium border-black">Home</Link>
+                        <Link to="/" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="px-3 py-2 hover:bg-gray-500 hover:text-white text-sm font-medium border-black">Home</Link>
                         <Link to="/about" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                         <Link to="#" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="text-black hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Why not Amazon?</Link>
                         <Link to="#" activeClassName="px-3 py-2 font-semibold border-b-2 border-black" className="bg-red-500 text-white font-medium bg-opacity-75 hover:bg-red-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Download the extension</Link>
